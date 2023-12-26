@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rope Animation</title>
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="line-container">
+        <svg viewBox="0 0 87 645" fill="none" preserveAspectRation="xMidYMax meet">
+            <path d="M45 0V227C35 222.667 12.6 220.4 3 246C6.33333 258 19.4 272.8 45 264L78 227V271L63 254V606C61.6667 608.667 61.8 614.2 73 615C84.2 615.8 84.3333 626.667 83 632H73V670C63.6667 674 40.8 679.6 24 670C7.2 660.4 17 650 24 646L17 626C22.6667 628.333 33 638.2 29 659C32.3333 650 41.4 632 51 632C49 626 46.2 612.4 51 606" stroke="#B20505" stroke-width="5"/>
+        </svg>          
+    </div>
+
+    <section class="one">
+        <h1 class="scroll" data-rate=".4" data-direction="vertical">ocean stuff</h1>
+    </section>
+
+    <section class="two">
+        <h1 class="scroll" data-rate=".2" data-direction="vertical">omg scroll</h1>
+        <p>big watermark</p>
+    </section>
+
+    <script>
+        let path = document.querySelector('path');
+        let pathLength = path.getTotalLength();
+
+        path.style.strokeDasharray = pathLength + ' ' + pathLength;
+        path.style.strokeDashoffset = pathLength;
+
+        window.addEventListener('scroll', () => {
+            
+            // what % down is it?
+            var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight + document.documentElement.clientHeight)
+
+            // Length to offset the dashes
+            var drawLength = pathLength * scrollPercentage
+
+            // Draw in reverse
+            path.style.strokeDashoffset = pathLength - drawLength
+        
+        })
+    </script>
+</body>
+</html>
